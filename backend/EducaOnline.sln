@@ -47,6 +47,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compras", "Compras", "{2802
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducaOnline.Bff", "src\api_gateways\EducaOnline.Bff\EducaOnline.Bff.csproj", "{9B71C015-9B73-2460-3798-A94CF30915A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducaOnline.Pedidos.API", "src\services\EducaOnline.Pedidos.API\EducaOnline.Pedidos.API.csproj", "{00FC2EFC-02CD-DCA9-782E-603532285D17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +91,10 @@ Global
 		{9B71C015-9B73-2460-3798-A94CF30915A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B71C015-9B73-2460-3798-A94CF30915A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B71C015-9B73-2460-3798-A94CF30915A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00FC2EFC-02CD-DCA9-782E-603532285D17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00FC2EFC-02CD-DCA9-782E-603532285D17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00FC2EFC-02CD-DCA9-782E-603532285D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00FC2EFC-02CD-DCA9-782E-603532285D17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +121,7 @@ Global
 		{D8FE215A-42BC-46F4-96C6-A2C02ED0CBD6} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{2802343E-A1AE-47B8-904E-227479237B24} = {D8FE215A-42BC-46F4-96C6-A2C02ED0CBD6}
 		{9B71C015-9B73-2460-3798-A94CF30915A9} = {2802343E-A1AE-47B8-904E-227479237B24}
+		{00FC2EFC-02CD-DCA9-782E-603532285D17} = {463A7642-7937-4DB6-B1B3-CA8FF28606C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DCD17264-9810-41B3-8DEC-849368893E01}
