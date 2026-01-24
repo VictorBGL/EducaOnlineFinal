@@ -4,19 +4,19 @@
 
 O **EducaOnline** é uma plataforma corporativa distribuída, construída com **arquitetura de microsserviços**, para **gestão completa de cursos, alunos, matrículas, pagamentos e certificados**, integrando múltiplos domínios via **mensageria RabbitMQ** e um **BFF (Backend for Frontend)** em .NET e um **frontend em Angular**.
 
-O projeto foi desenvolvido como parte do MBA **DevXpert Full Stack .NET**, no módulo **Construção de Aplicações Corporativas**, aplicando **DDD (Domain-Driven Design)**, **CQRS**, **Event-Driven Architecture** e **Clean Architecture**.
+O projeto foi desenvolvido como parte do MBA **DevXpert Full Stack .NET**, no módulo **Construcao de Aplicacoes Corporativas e DevOps e Cloud**, aplicando **DDD (Domain-Driven Design)**, **CQRS**, **Event-Driven Architecture** e **Clean Architecture** e **DevOps com CI/CD**.
 
 ---
 
 ## **2. Autor**
 
-- **Victor Lino**
+- **Victor Brentagani Gonçalves Lino**
 
 ---
 
 ## **3. Arquitetura do Projeto**
 
-A solução é organizada em **camadas independentes**:
+A solução é organizada em **camadas independentes** com separação clara de responsabilidades:
 
 ```
 EducaOnline/
@@ -52,7 +52,7 @@ EducaOnline/
 
 ## **4. Comunicação entre Domínios**
 
-O **Message Bus** (RabbitMQ) é utilizado para a troca de eventos entre os contextos:
+A comunicação entre os serviços ocorre via **RabbitMQ**, utilizando eventos de domínio para desacoplamento:
 
 - **Identidade** → publica criação de usuários (Aluno/Admin)
 - **Aluno.API** → publica matrícula criada / concluída
@@ -202,7 +202,40 @@ Acesse em: http://localhost:4200
 | **EducaOnline.Pedidos.API**    | 7004  | Pedidos e checkout       |
 | **EducaOnline.Financeiro.API** | 7005  | Processamento financeiro |
 
-## **12. Licença e Contribuição**
+---
+
+## **12. DevOps, CI/CD e Docker**
+
+### **Pipeline CI/CD (GitHub Actions)**
+
+O projeto possui **pipeline CI/CD automatizado**, configurado com **GitHub Actions**, responsável por:
+
+- **Build e restore do backend (.NET)**
+- **Build do frontend (Angular + NX)**
+- **Execução de testes**
+- **Build de imagens Docker**
+- **Push automático das imagens para o Docker Hub**
+
+Os pipelines são executados automaticamente a cada **push** ou **pull request** para a **branch principal**, garantindo integração contínua e entrega confiável.
+
+---
+
+### **Imagens Docker Publicadas**
+
+As imagens Docker são publicadas automaticamente no **Docker Hub**, permitindo fácil execução em ambientes locais ou cloud:
+
+- **educaonline-frontend**
+- **educaonline-identidade-api**
+- **educaonline-aluno-api**
+- **educaonline-conteudo-api**
+- **educaonline-pedidos-api**
+- **educaonline-financeiro-api**
+- **educaonline-bff-api**
+
+Todas as imagens são **versionadas**, garantindo rastreabilidade e consistência entre ambientes.
+
+
+## **13. Licença e Contribuição**
 
 Este projeto é parte de um curso acadêmico e **não aceita contribuições externas**.
 
