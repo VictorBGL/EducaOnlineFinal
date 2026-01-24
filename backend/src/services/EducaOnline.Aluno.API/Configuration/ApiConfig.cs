@@ -1,5 +1,6 @@
 ﻿using EducaOnline.Aluno.API.Data;
 using EducaOnline.Aluno.API.Middlewares;
+using EducaOnline.WebAPI.Core.Configuration;
 using EducaOnline.WebAPI.Core.Identidade;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,6 +38,7 @@ namespace EducaOnline.Aluno.API.Configuration
 
             services.AddAutoMapper(typeof(Program));
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+            services.AddHealthCheckConfig(configuration);
         }
 
         public static void UseApiConfig(this WebApplication app, IWebHostEnvironment env)
@@ -55,6 +57,8 @@ namespace EducaOnline.Aluno.API.Configuration
             app.UseCors("Total");
 
             app.UseAuthConfiguration();
+
+            app.UseHealthCheckConfig();
 
             app.MapControllers();
         }

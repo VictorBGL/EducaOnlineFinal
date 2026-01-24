@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: financeiro-api
+  namespace: educaonline
+  labels:
+    app: financeiro-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: financeiro-api
+  template:
+    metadata:
+      labels:
+        app: financeiro-api
+    spec:
+      containers:
+        - name: financeiro-api
+          image: vbglino/educaonline-financeiro-api:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: educaonline-config
+                  key: ASPNETCORE_ENVIRONMENT
+            - name: ASPNETCORE_URLS
+              valueFrom:
+                configMapKeyRef:
+                  name: educaonline-config
+                  key: ASPNETCORE_URLS
+            - name: ConnectionStrings__DefaultConnection
+              valueFrom:
+                secretKeyRef:
+                  name: educaonline-secrets
+                  key: SQLITE_CONNECTION
+            - name: MessageQueueConnection__MessageBus
+              valueFrom:
+                secretKeyRef:
+                  name: educaonline-secrets
+                  key: RABBITMQ_CONNECTION
+            - name: JwtSettings__Segredo
+              valueFrom:
+                secretKeyRef:
+                  name: educaonline-secrets
+                  key: JWT_SEGREDO
+            - name: JwtSettings__HorasParaExpirar
+              valueFrom:
+                configMapKeyRef:
+                  name: educaonline-config
+                  key: JWT_HORAS_EXPIRAR
+            - name: JwtSettings__Emissor
+              valueFrom:
+                configMapKeyRef:
+                  name: educaonline-config
+                  key: JWT_EMISSOR
+            - name: JwtSettings__Audiencia
+              valueFrom:
+                configMapKeyRef:
+                  name: educaonline-config
+                  key: JWT_AUDIENCIA
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: financeiro-api-service
+  namespace: educaonline
+  labels:
+    app: financeiro-api
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: financeiro-api

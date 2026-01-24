@@ -1,4 +1,5 @@
-﻿using EducaOnline.WebAPI.Core.Identidade;
+﻿using EducaOnline.WebAPI.Core.Configuration;
+using EducaOnline.WebAPI.Core.Identidade;
 
 namespace EducaOnline.Identidade.API.Configurations
 {
@@ -36,6 +37,8 @@ namespace EducaOnline.Identidade.API.Configurations
             app.UseHttpsRedirection();
 
             app.UseAuthConfiguration();
+
+            app.UseHealthCheckConfig();
 
             app.MapControllers();
 

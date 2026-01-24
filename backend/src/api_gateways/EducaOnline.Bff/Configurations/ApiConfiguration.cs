@@ -1,4 +1,5 @@
 ﻿using EducaOnline.Bff.Extensions;
+using EducaOnline.WebAPI.Core.Configuration;
 using EducaOnline.WebAPI.Core.Identidade;
 
 namespace EducaOnline.Bff.Configurations
@@ -19,6 +20,7 @@ namespace EducaOnline.Bff.Configurations
                             .AllowAnyMethod()
                             .AllowAnyHeader());
             });
+            services.AddHealthCheckConfig(configuration);
             return services;
         }
 
@@ -34,6 +36,8 @@ namespace EducaOnline.Bff.Configurations
             app.UseCors("Total");
 
             app.UseAuthConfiguration();
+
+            app.UseHealthCheckConfig();
 
             app.MapControllers();
 

@@ -1,4 +1,5 @@
-﻿using EducaOnline.WebAPI.Core.Identidade;
+﻿using EducaOnline.WebAPI.Core.Configuration;
+using EducaOnline.WebAPI.Core.Identidade;
 using EducaOnLine.Pedidos.API.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +26,8 @@ namespace EducaOnline.Pedidos.API.Configurations
                             .AllowAnyHeader());
             });
 
+            services.AddHealthCheckConfig(configuration);
+
             return services;
         }
 
@@ -43,6 +46,8 @@ namespace EducaOnline.Pedidos.API.Configurations
             app.UseCors("Total");
 
             app.UseAuthConfiguration();
+
+            app.UseHealthCheckConfig();
 
             app.MapControllers();
 

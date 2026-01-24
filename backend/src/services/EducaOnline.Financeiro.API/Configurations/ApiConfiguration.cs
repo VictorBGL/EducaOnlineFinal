@@ -2,6 +2,7 @@
 using EducaOnline.Financeiro.API.Data;
 using EducaOnline.WebAPI.Core.Identidade;
 using EducaOnline.Financeiro.API.Facade;
+using EducaOnline.WebAPI.Core.Configuration;
 
 namespace EducaOnline.Financeiro.API.Configurations
 {
@@ -27,6 +28,8 @@ namespace EducaOnline.Financeiro.API.Configurations
                             .AllowAnyHeader());
             });
 
+            services.AddHealthCheckConfig(configuration);
+
             return services;
         }
 
@@ -43,6 +46,8 @@ namespace EducaOnline.Financeiro.API.Configurations
             app.UseCors("Total");
 
             app.UseAuthConfiguration();
+
+            app.UseHealthCheckConfig();
 
             app.MapControllers();
 
